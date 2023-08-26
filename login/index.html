@@ -84,19 +84,21 @@
             if (canLogin == true){
                 if (document.querySelector(".email").value == ""){
                     alert("Missing email")
+                } else {
+                    if (document.querySelector(".pswwrd").value == ""){
+                        alert("Missing password")
+                    } else {
+                        firebase.auth().signInWithEmailAndPassword(document.querySelector(".email").value, document.querySelector(".pswwrd").value)
+                        .then((userCredential) => {
+                            var user = userCredential.user;
+                        })
+                        .catch((error) => {
+                            var errorCode = error.code;
+                            var errorMessage = error.message;
+                            alert(errorMessage)
+                        });
+                    }
                 }
-                if (document.querySelector(".pswwrd").value == ""){
-                    alert("Missing password")
-                }
-                firebase.auth().signInWithEmailAndPassword(document.querySelector(".email").value, document.querySelector(".pswwrd").value)
-                .then((userCredential) => {
-                    var user = userCredential.user;
-                })
-                .catch((error) => {
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                    alert(errorMessage)
-                });
             } else {
                 alert("Missing captcha")
             }
