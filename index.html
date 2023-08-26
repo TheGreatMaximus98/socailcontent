@@ -3,20 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>SocialContent</title>
+    <title>Loading...</title>
 </head>
 <body>
-    <div class="login-container">
-        <h2>Login</h2>
-        Email: <input class="email" type="email">
-        Password: <input class="pswwrd" type="password">
-        <div class="cf-turnstile" data-sitekey="0x4AAAAAAAJRfw3CS0yG0IMS" data-callback="run()"></div>
-    </div>
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <script src="https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.3.0/firebase-auth.js"></script>
-    <script src="login.js"></script>
-</html>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyCuYXfAsSUQP-1gNRXXDetCU-KDdPDnpwY",
+            authDomain: "socialcontent-db.firebaseapp.com",
+            projectId: "socialcontent-db",
+            storageBucket: "socialcontent-db.appspot.com",
+            messagingSenderId: "488254523586",
+            appId: "1:488254523586:web:071e852334555ebcbb135b",
+            measurementId: "G-HYD48R46J9"
+        };
+        const app = initializeApp(firebaseConfig);
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                document.location.href = "/chat"
+            } else {
+                document.location.href = "/login"
+            }
+        });
+    </script>
 </body>
 </html>

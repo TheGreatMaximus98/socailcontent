@@ -8,3 +8,14 @@ const firebaseConfig = {
   measurementId: "G-HYD48R46J9"
 };
 const app = initializeApp(firebaseConfig);
+function login(){
+  firebase.auth().signInWithEmailAndPassword(document.querySelector(".email").value, document.querySelector(".pswwrd").value)
+  .then((userCredential) => {
+    var user = userCredential.user;
+  })
+  .catch((error) => {
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    alert(errorMessage)
+  });
+}
