@@ -61,7 +61,7 @@
         Email: <input class="email" type="email"><br>
         Password: <input class="pswwrd" type="password">
         <div class="cf-turnstile" data-sitekey="0x4AAAAAAAJRfw3CS0yG0IMS" data-callback="allowlogin"></div>
-        <button class="login-btn" disabled>Login</button>
+        <button class="login-btn">Login</button>
     </div>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
@@ -79,7 +79,6 @@
         const canLogin = false
         function allowlogin(){
             canLogin = true
-            document.querySelector(".login-btn").removeAttribute("disabled")
         }
         function login(){
             if (canLogin == true){
