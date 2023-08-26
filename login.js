@@ -7,7 +7,7 @@ const firebaseConfig = {
   appId: "1:488254523586:web:071e852334555ebcbb135b",
   measurementId: "G-HYD48R46J9"
 };
-const app = initializeApp(firebaseConfig);
+const app = firebase.initializeApp(firebaseConfig);
 function login(){
   firebase.auth().signInWithEmailAndPassword(document.querySelector(".email").value, document.querySelector(".pswwrd").value)
   .then((userCredential) => {

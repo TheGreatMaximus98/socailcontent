@@ -18,7 +18,7 @@
             appId: "1:488254523586:web:071e852334555ebcbb135b",
             measurementId: "G-HYD48R46J9"
         };
-        const app = initializeApp(firebaseConfig);
+        const app = firebase.initializeApp(firebaseConfig);
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
                 document.location.href = "/chat"
