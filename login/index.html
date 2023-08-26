@@ -3,7 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+        .login-container {
+            text-align: center;
+        }
+    </style>
     <title>SocialContent - Login</title>
 </head>
 <body>
@@ -16,7 +25,29 @@
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
-    <script src="login.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyCuYXfAsSUQP-1gNRXXDetCU-KDdPDnpwY",
+            authDomain: "socialcontent-db.firebaseapp.com",
+            projectId: "socialcontent-db",
+            storageBucket: "socialcontent-db.appspot.com",
+            messagingSenderId: "488254523586",
+            appId: "1:488254523586:web:071e852334555ebcbb135b",
+            measurementId: "G-HYD48R46J9"
+        };
+        const app = firebase.initializeApp(firebaseConfig);
+        function login(){
+            firebase.auth().signInWithEmailAndPassword(document.querySelector(".email").value, document.querySelector(".pswwrd").value)
+            .then((userCredential) => {
+            var user = userCredential.user;
+            })
+            .catch((error) => {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            alert(errorMessage)
+            });
+        }
+    </script>
 </html>
 </body>
 </html>
