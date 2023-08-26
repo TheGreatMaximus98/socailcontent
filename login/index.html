@@ -80,6 +80,7 @@
         function allowlogin(){
             canLogin = true
         }
+        document.querySelector(".login-btn").addEventListener("onclick", login)
         function login(){
             if (canLogin == true){
                 if (document.querySelector(".email").value == ""){
