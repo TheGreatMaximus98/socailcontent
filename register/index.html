@@ -89,7 +89,7 @@
                     if (document.querySelector(".pswwrd").value == ""){
                         alert("Missing password")
                     } else {
-                        firebase.auth().signInWithEmailAndPassword(document.querySelector(".email").value, document.querySelector(".pswwrd").value)
+                        firebase.auth().createUserWithEmailAndPassword(document.querySelector(".email").value, document.querySelector(".pswwrd").value)
                         .then((userCredential) => {
                             var user = userCredential.user;
                         })
