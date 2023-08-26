@@ -82,6 +82,12 @@
         }
         function login(){
             if (canLogin == true){
+                if (document.querySelector(".email").value == ""){
+                    alert("Missing email")
+                }
+                if (document.querySelector(".pswwrd").value == ""){
+                    alert("Missing password")
+                }
                 firebase.auth().signInWithEmailAndPassword(document.querySelector(".email").value, document.querySelector(".pswwrd").value)
                 .then((userCredential) => {
                     var user = userCredential.user;
