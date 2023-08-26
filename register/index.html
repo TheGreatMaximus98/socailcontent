@@ -57,12 +57,12 @@
 </head>
 <body>
     <div class="login-container">
-        <h2>Login</h2>
+        <h2>Register</h2>
         Email: <input class="email" type="email"><br>
         Password: <input class="pswwrd" type="password">
         <div class="cf-turnstile" data-sitekey="0x4AAAAAAAJRfw3CS0yG0IMS" data-callback="allowlogin"></div>
-        <a href="/register/">Register</a>
-        <button class="login-btn" onclick="login()">Login</button>
+        <a href="/login">Login</a>
+        <button class="login-btn" onclick="register()">Register</button>
     </div>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
@@ -81,7 +81,7 @@
         function allowlogin(){
             canLogin = true
         }
-        function login(){
+        function register(){
             if (canLogin == true){
                 if (document.querySelector(".email").value == ""){
                     alert("Missing email")
