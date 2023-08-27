@@ -102,7 +102,7 @@
             }
         })
         firebase.firestore().collection("messages").onSnapshot((querySnapshot) => {
-            querySnapshot.docChange().forEach((change) => {
+            querySnapshot.docChanges().forEach((change) => {
                 const { email, text } = change.doc.data();
                 const msgId = change.doc.id;
                 if (change.type === "added" && !displayedMessages.has(msgId)) {
