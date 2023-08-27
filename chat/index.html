@@ -82,7 +82,7 @@
                 document.location.href = "/"
             }
         })
-        msgRef.on('child_added', updateMsgs);
+        firebase.firestore().ref("messages").on('child_added', updateMsgs);
         const updateMsgs = data =>{
             const {email, text} = data.val();
             const msg = `<div class="msg"><p>${email}</p><p>${text}</p></div>`
