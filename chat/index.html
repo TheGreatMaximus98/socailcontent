@@ -82,7 +82,7 @@
                 document.location.href = "/"
             }
         })
-        firebase.firestore().ref("messages").on('child_added', updateMsgs);
+        firebase.firestore().collection("messages").on('child_added', updateMsgs);
         const updateMsgs = data =>{
             const {email, text} = data.val();
             const msg = `<div class="msg"><p>${email}</p><p>${text}</p></div>`
@@ -92,7 +92,7 @@
         function send(){
             const text = document.querySelector('.msg').value
             if (!text.trim()){ return alert("Empty message") }
-            firebase.firestore().ref("messages").push({
+            firebase.firestore().collection("messages").push({
                 "email": firebase.auth().currentUser.email,
                 "msg": text
             })
