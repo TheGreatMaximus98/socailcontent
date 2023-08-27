@@ -53,19 +53,13 @@
         border-color: #0039D7;
         }
     </style>
-    <title>SocialContent - Login</title>
+    <title>SocialContent - Chat</title>
 </head>
 <body>
-    <div class="login-container">
-        <h2>Register</h2>
-        Email: <input class="email" type="email"><br>
-        Password: <input class="pswwrd" type="password">
-        <div class="cf-turnstile" data-sitekey="0x4AAAAAAAJRfw3CS0yG0IMS" data-callback="allowlogin"></div>
-        <a href="/login">Login</a>
-        <button class="login-btn" onclick="register()">Register</button>
-    </div>
+    <div class="chat"></div>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+    
     <script>
         const firebaseConfig = {
             apiKey: "AIzaSyCuYXfAsSUQP-1gNRXXDetCU-KDdPDnpwY",
@@ -77,39 +71,16 @@
             measurementId: "G-HYD48R46J9"
         };
         const app = firebase.initializeApp(firebaseConfig);
-        var canLogin = false
+        var uid = ""
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
-                document.location.href = "/chat"
+                uid = user.uid
+                alert(uid)
+            } else {
+                document.location.href = "/"
             }
         });
-        function allowlogin(){
-            canLogin = true
-        }
-        function register(){
-            if (canLogin == true){
-                if (document.querySelector(".email").value == ""){
-                    alert("Missing email")
-                } else {
-                    if (document.querySelector(".pswwrd").value == ""){
-                        alert("Missing password")
-                    } else {
-                        firebase.auth().createUserWithEmailAndPassword(document.querySelector(".email").value, document.querySelector(".pswwrd").value)
-                        .then((userCredential) => {
-                            var user = userCredential.user;
-                            document.location.href = "/"
-                        })
-                        .catch((error) => {
-                            var errorCode = error.code;
-                            var errorMessage = error.message;
-                            alert(errorMessage)
-                        });
-                    }
-                }
-            } else {
-                alert("Missing captcha")
-            }
-        }
+        db.collection("cities")
     </script>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </html>

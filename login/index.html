@@ -78,6 +78,11 @@
         };
         const app = firebase.initializeApp(firebaseConfig);
         var canLogin = false
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                document.location.href = "/chat"
+            }
+        });
         function allowlogin(){
             canLogin = true
         }
