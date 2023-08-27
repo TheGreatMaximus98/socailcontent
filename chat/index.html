@@ -75,7 +75,6 @@
 </head>
 <body>
     <div class="chat"></div>
-    <div class="chat-divider"></div>
     <div class="chat-controls">
         <input class="msg-input"><button class="send-btn" onclick="send()">Send</button>
     </div>
@@ -93,6 +92,7 @@
             measurementId: "G-HYD48R46J9"
         };
         const app = firebase.initializeApp(firebaseConfig);
+        const displayedMessages = new Set();
         var uid = ""
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
@@ -104,9 +104,11 @@
         firebase.firestore().collection("messages").onSnapshot((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 const { email, text } = doc.data();
-                const msg = `<div class="msg"><p class="msg-email">${email}</p><p class="msg-text">${text}</p></div>`;
-                document.querySelector(".chat").innerHTML += msg;
-                document.getElementById("chat-window").scrollTop = document.getElementById("chat-window").scrollHeight;
+                if (!displayedMessages.has(msgId)) {
+                    const msg = `<div class="msg"><p class="msg-email">${email}</p><p class="msg-text">${text}</p></div><div class="chat-divider"></div>`;
+                    document.querySelector(".chat").innerHTML += msg;
+                    displayedMessages.add(msgId);
+                }
             })
         })
         function send(){
