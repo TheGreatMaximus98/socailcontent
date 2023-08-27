@@ -104,6 +104,7 @@
         firebase.firestore().collection("messages").onSnapshot((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 const { email, text } = doc.data();
+                const msgId = doc.id;
                 if (!displayedMessages.has(msgId)) {
                     const msg = `<div class="msg"><p class="msg-email">${email}</p><p class="msg-text">${text}</p></div><div class="chat-divider"></div>`;
                     document.querySelector(".chat").innerHTML += msg;
