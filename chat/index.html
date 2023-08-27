@@ -75,12 +75,13 @@
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
                 uid = user.uid
-                alert(uid)
             } else {
                 document.location.href = "/"
             }
         });
-        db.collection("cities")
+        db.collection("messages").set(Math.floor((Math.random() * 100) + 1).toString(), {
+            "msg": "test"
+        })
     </script>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </html>
