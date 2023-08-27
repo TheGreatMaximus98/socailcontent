@@ -82,12 +82,14 @@
                 document.location.href = "/"
             }
         })
-        firebase.firestore().collection("messages").on('child_added', data => {
-            const {email, text} = data.val();
-            const msg = `<div class="msg"><p>${email}</p><p>${text}</p></div>`
-            document.querySelector("chat").innerHTML += msg;
-            document.getElementById("chat-window").scrollTop = document.getElementById("chat-window").scrollHeight;
-        });
+        firebase.firestore().collection("messages").onSnapshot((snap) => {
+            snap.forEach((data) => {
+                const {email, text} = data.val();
+                const msg = `<div class="msg"><p>${email}</p><p>${text}</p></div>`
+                document.querySelector("chat").innerHTML += msg;
+                document.getElementById("chat-window").scrollTop = document.getElementById("chat-window").scrollHeight;
+            })
+        })
         function send(){
             const text = document.querySelector('.msg').value
             if (!text.trim()){ return alert("Empty message") }
