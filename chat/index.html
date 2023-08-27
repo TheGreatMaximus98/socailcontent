@@ -9,10 +9,10 @@
             padding: 0;
             font-family: sans-serif;
         }
-        .login-container {
+        .send-container {
             text-align: center;
         }
-        .login-btn {
+        .send-btn {
         appearance: button;
         background-color: #1652F0;
         border: 1px solid #1652F0;
@@ -35,20 +35,20 @@
         width: fit-content;
         }
 
-        .login-btn:disabled {
+        .send-btn:disabled {
         opacity: .5;
         }
 
-        .login-btn:focus {
+        .send-btn:focus {
         outline: 0;
         }
 
-        .login-btn:hover {
+        .send-btn:hover {
         background-color: #0A46E4;
         border-color: #0A46E4;
         }
 
-        .login-btn:active {
+        .send-btn:active {
         background-color: #0039D7;
         border-color: #0039D7;
         }
@@ -57,6 +57,9 @@
 </head>
 <body>
     <div class="chat"></div>
+    <div class="chat-controls">
+        <input class="msg"><button class="send-btn" onclick="send()">Send</button>
+    </div>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
     
@@ -78,10 +81,23 @@
             } else {
                 document.location.href = "/"
             }
-        });
-        db.collection("messages").set(Math.floor((Math.random() * 100) + 1).toString(), {
-            "msg": "test"
         })
+        msgRef.on('child_added', updateMsgs);
+        const updateMsgs = data =>{
+            const {email, text} = data.val();
+            const msg = `<div class="msg"><p>${email}</p><p>${text}</p></div>`
+            document.querySelector("chat").innerHTML += msg;
+            document.getElementById("chat-window").scrollTop = document.getElementById("chat-window").scrollHeight;
+        }
+        function send(){
+            const text = document.querySelector('.msg').value
+            if (!text.trim()){ return alert("Empty message") }
+            firebase.firestore().ref("messages").push({
+                "email": firebase.auth().currentUser.email,
+                "msg": text
+            })
+            text.value = ""
+        }
     </script>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </html>
