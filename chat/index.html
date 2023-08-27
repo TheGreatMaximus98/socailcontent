@@ -7,56 +7,75 @@
         html, body {
             margin: 0;
             padding: 0;
+            text-align: center;
             font-family: sans-serif;
         }
         .send-container {
             text-align: center;
         }
         .send-btn {
-        appearance: button;
-        background-color: #1652F0;
-        border: 1px solid #1652F0;
-        border-radius: 4px;
-        box-sizing: border-box;
-        color: #FFFFFF;
-        cursor: pointer;
-        font-family: Graphik,-apple-system,system-ui,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
-        font-size: 14px;
-        line-height: 1.15;
-        overflow: visible;
-        padding: 12px 16px;
-        position: relative;
-        text-align: center;
-        text-transform: none;
-        transition: all 80ms ease-in-out;
-        user-select: none;
-        -webkit-user-select: none;
-        touch-action: manipulation;
-        width: fit-content;
+            appearance: button;
+            background-color: #1652F0;
+            border: 1px solid #1652F0;
+            border-radius: 4px;
+            box-sizing: border-box;
+            color: #FFFFFF;
+            cursor: pointer;
+            font-family: Graphik,-apple-system,system-ui,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+            font-size: 14px;
+            line-height: 1.15;
+            overflow: visible;
+            padding: 12px 16px;
+            position: relative;
+            text-align: center;
+            text-transform: none;
+            transition: all 80ms ease-in-out;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            width: fit-content;
         }
 
         .send-btn:disabled {
-        opacity: .5;
+            opacity: .5;
         }
 
         .send-btn:focus {
-        outline: 0;
+            outline: 0;
         }
 
         .send-btn:hover {
-        background-color: #0A46E4;
-        border-color: #0A46E4;
+            background-color: #0A46E4;
+            border-color: #0A46E4;
         }
 
         .send-btn:active {
-        background-color: #0039D7;
-        border-color: #0039D7;
+            background-color: #0039D7;
+            border-color: #0039D7;
+        }
+
+        .chat {
+            display: flex;
+            justify-content: center;
+        }
+
+        .chat-divider {
+            height: 10px;
+        }
+
+        .msg {
+            text-align: left;
+            background-color: #3d71ff;
+            width: 200px;
+            padding: 5px;
+            padding-left: 15px;
         }
     </style>
     <title>SocialContent - Chat</title>
 </head>
 <body>
     <div class="chat"></div>
+    <div class="chat-divider"></div>
     <div class="chat-controls">
         <input class="msg"><button class="send-btn" onclick="send()">Send</button>
     </div>
@@ -85,7 +104,7 @@
         firebase.firestore().collection("messages").onSnapshot((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 const { email, text } = doc.data();
-                const msg = `<div class="msg"><p>${email}</p><p>${text}</p></div>`;
+                const msg = `<div class="msg"><p class="msg-email">${email}</p><p class="msg-text">${text}</p></div>`;
                 document.querySelector(".chat").innerHTML += msg;
                 document.getElementById("chat-window").scrollTop = document.getElementById("chat-window").scrollHeight;
             })
