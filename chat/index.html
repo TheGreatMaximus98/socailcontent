@@ -55,7 +55,8 @@
         }
 
         .chat {
-            justify-content: center;
+            height: 94.8px;
+            overflow-y: visible;
         }
 
         .chat-divider {
@@ -104,10 +105,16 @@
             querySnapshot.forEach((doc) => {
                 const { email, text } = doc.data();
                 const msgId = doc.id;
-                if (!displayedMessages.has(msgId)) {
+                if (change.type === "added" && !displayedMessages.has(msgId)) {
                     const msg = `<div class="msg"><p class="msg-email">${email}</p><p class="msg-text">${text}</p></div><br>`;
                     document.querySelector(".chat").innerHTML += msg;
                     displayedMessages.add(msgId);
+                } else if (change.type === "removed" && displayedMessages.has(msgId)) {
+                    const msgElement = document.getElementById(`message-${msgId}`);
+                    if (msgElement) {
+                        msgElement.remove();
+                    }
+                    displayedMessages.delete(msgId);
                 }
             })
         })
