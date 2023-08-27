@@ -92,7 +92,7 @@
         function send(){
             const text = document.querySelector('.msg').value
             if (!text.trim()){ return alert("Empty message") }
-            firebase.firestore().collection("messages").push({
+            firebase.firestore().collection("messages").add({
                 "email": firebase.auth().currentUser.email,
                 "msg": text
             })
