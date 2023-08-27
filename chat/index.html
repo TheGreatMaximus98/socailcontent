@@ -106,7 +106,7 @@
                 const { email, text } = change.doc.data();
                 const msgId = change.doc.id;
                 if (change.type === "added" && !displayedMessages.has(msgId)) {
-                    const msg = `<div class="msg-${msgId}"><p class="msg-email">${email}</p><p class="msg-text">${text}</p></div><br>`;
+                    const msg = `<div class="msg msg-${msgId}"><p class="msg-email">${email}</p><p class="msg-text">${text}</p></div><br>`;
                     document.querySelector(".chat").innerHTML += msg;
                     displayedMessages.add(msgId);
                 } else if (change.type === "removed" && displayedMessages.has(msgId)) {
