@@ -106,7 +106,7 @@
                 const { email, text } = doc.data();
                 const msgId = doc.id;
                 if (!displayedMessages.has(msgId)) {
-                    const msg = `<div class="msg"><p class="msg-email">${email}</p><p class="msg-text">${text}</p></div><div class="chat-divider"></div>`;
+                    const msg = `<div class="msg"><p class="msg-email">${email}</p><p class="msg-text">${text}</p></div><br>`;
                     document.querySelector(".chat").innerHTML += msg;
                     displayedMessages.add(msgId);
                 }
@@ -117,7 +117,7 @@
             if (!text){ return alert("Empty message") }
             firebase.firestore().collection("messages").add({
                 "email": firebase.auth().currentUser.email,
-                "msg": text
+                "text": text
             })
             text.value = ""
         }
