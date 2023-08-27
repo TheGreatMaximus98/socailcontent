@@ -77,7 +77,7 @@
     <div class="chat"></div>
     <div class="chat-divider"></div>
     <div class="chat-controls">
-        <input class="msg"><button class="send-btn" onclick="send()">Send</button>
+        <input class="msg-input"><button class="send-btn" onclick="send()">Send</button>
     </div>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
@@ -110,7 +110,7 @@
             })
         })
         function send(){
-            const text = document.querySelector('.msg').value
+            const text = document.querySelector('.msg-input').value
             if (!text.trim()){ return alert("Empty message") }
             firebase.firestore().collection("messages").add({
                 "email": firebase.auth().currentUser.email,
